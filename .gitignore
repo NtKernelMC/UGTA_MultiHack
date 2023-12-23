@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/.vs
+/MultiHack/.vs/MultiHack
+/MultiHack/Release
