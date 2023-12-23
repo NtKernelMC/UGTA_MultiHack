@@ -55,7 +55,11 @@ ptrSendPacket callSendPacket = nullptr;
 bool __fastcall SendPacket(void* ECX, void* EDX, unsigned char ucPacketID, void* bitStream, int packetPriority, int packetReliability, int packetOrdering)
 {
     RestorePrologue((DWORD)callSendPacket, firstPrologue, 5);
-    if (ucPacketID == 91) return true; // shout up anticheat
+    if (ucPacketID == 91)
+    {
+        MakeJump((DWORD)callSendPacket, (DWORD)&SendPacket, firstPrologue, 5);
+        return true; // shout up anticheat
+    }
     bool rslt = callSendPacket(ECX, ucPacketID, bitStream, packetPriority, packetReliability, packetOrdering);
     MakeJump((DWORD)callSendPacket, (DWORD)&SendPacket, firstPrologue, 5);
     return rslt;
