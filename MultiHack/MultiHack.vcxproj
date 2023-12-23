@@ -145,8 +145,10 @@
     <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CVector.h" />
     <ClInclude Include="sigscan.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="WepTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

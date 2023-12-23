@@ -1,6 +1,36 @@
 #pragma once
+#define LOG_NAME "SigTest.log"
+#define HACK_VER "V1"
 #include <Windows.h>
 #include <stdio.h>
+#include <direct.h>
+#include "WepTypes.h"
+#include "CVector.h"
+#include "sigscan.h"
+
+void __stdcall LogInFile(std::string log_name, const char* log, ...)
+{
+	char hack_dir[600]; memset(hack_dir, 0, sizeof(hack_dir));
+	_getcwd(hack_dir, sizeof(hack_dir)); char new_dir[600];
+	memset(new_dir, 0, sizeof(new_dir));
+	sprintf(new_dir, "%s\\%s", hack_dir, log_name.c_str());
+	static bool once = false; if (!once)
+	{
+		FILE* hFile = fopen(new_dir, "rb");
+		if (hFile) { fclose(hFile); DeleteFileA(new_dir); }
+		once = true;
+	}
+	FILE* hFile = fopen(new_dir, "a+");
+	if (hFile)
+	{
+		time_t t = std::time(0); tm* now = std::localtime(&t);
+		char tmp_stamp[600]; memset(tmp_stamp, 0, sizeof(tmp_stamp));
+		sprintf(tmp_stamp, "[%d:%d:%d]", now->tm_hour, now->tm_min, now->tm_sec);
+		strcat(tmp_stamp, std::string(" " + std::string(log)).c_str());
+		va_list arglist; va_start(arglist, log); vfprintf(hFile, tmp_stamp, arglist);
+		va_end(arglist); fclose(hFile);
+	}
+}
 
 void SetSpreadMultiplier(float fltMultiplier)
 {
