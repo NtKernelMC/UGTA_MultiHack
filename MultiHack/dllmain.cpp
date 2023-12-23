@@ -125,23 +125,27 @@ void CheatThread()
         {
             OneShot ^= true;
             MessageBeep(MB_ICONHAND);
+            Sleep(1000);
 		}
         if (GetAsyncKeyState(DamagerX2Key))
         {
             DamagerX2Key ^= true;
             MessageBeep(MB_ICONHAND);
+            Sleep(1000);
         }
         if (GetAsyncKeyState(HealthKey))
         {
             DWORD PEDSELF = *(DWORD*)0xB6F5F0;
             *(float*)(PEDSELF + 0x540) = 175.0f;
 			MessageBeep(MB_ICONHAND);
+            Sleep(1000);
 		}
         if (GetAsyncKeyState(ArmorKey))
         {
             DWORD PEDSELF = *(DWORD*)0xB6F5F0;
             *(float*)(PEDSELF + 0x548) = 100.0f;
             MessageBeep(MB_ICONHAND);
+            Sleep(1000);
         }
         if (GetAsyncKeyState(NoSpreadKey))
         {
@@ -149,6 +153,7 @@ void CheatThread()
             if (NoSpread) SetSpreadMultiplier(0.00F);
             else SetSpreadMultiplier(100.00F);
             MessageBeep(MB_ICONHAND);
+            Sleep(1000);
         }
         Sleep(150);
     }
