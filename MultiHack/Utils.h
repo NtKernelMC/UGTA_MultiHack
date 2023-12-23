@@ -1,12 +1,22 @@
 #pragma once
 #define LOG_NAME "SigTest.log"
-#define HACK_VER "V1"
+#define HACK_VER "V2"
 #include <Windows.h>
 #include <stdio.h>
 #include <direct.h>
+#include <string>
+#include <algorithm>
 #include "WepTypes.h"
 #include "CVector.h"
 #include "sigscan.h"
+
+bool findStringIC(const std::string& strHaystack, const std::string& strNeedle)
+{
+	auto it = std::search(strHaystack.begin(), strHaystack.end(),
+		strNeedle.begin(), strNeedle.end(),
+		[](char ch1, char ch2) { return std::toupper(ch1) == std::toupper(ch2); });
+	return (it != strHaystack.end());
+}
 
 void __stdcall LogInFile(std::string log_name, const char* log, ...)
 {
